@@ -35,7 +35,7 @@ public class TestBase {
 	public static ExtentReports report;
 	static DesiredCapabilities cap;
 	Excel_Reader excel;
-
+public static String path;
 	/**
 	 * This method is to determine the reading the property file.
 	 * 
@@ -44,8 +44,8 @@ public class TestBase {
 	public void properties() throws IOException {
 		prop = new Properties();
 		try {
-			fis = new FileInputStream(
-					System.getProperty("user.dir") + "/src/test/java/com/valtech/configs/config.properties");
+			path = "C:\\SRS\\SRS\\src\\test\\java\\com\\susex\\configs\\";
+			fis = new FileInputStream(path+"config.properties");
 			prop.load(fis);
 			System.out.println("Properties from config file " + prop);
 		} catch (FileNotFoundException e) {
@@ -56,7 +56,7 @@ public class TestBase {
 	}
 
 	public String[][] getData(String excelName, String sheetName) {
-		String path = System.getProperty("user.dir") + "/src/main/resources/resources/testData/" + excelName;
+		String path = System.getProperty("user.dir") + "/src/main/resources/Resources/TestData/" + excelName;
 		excel = new Excel_Reader(path);
 		String[][] data = excel.getDataFromSheet(sheetName, excelName);
 		return data;

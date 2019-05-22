@@ -46,7 +46,7 @@ public class Listener extends TestBase implements ITestListener{
 
 			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			try {
-				String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/java/com/test/automation/uiAutomation/";
+				String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/src/main/resources/snapshots/";
 				File destFile = new File((String) reportDirectory + "/failure_screenshots/" + methodName + "_" + formater.format(calendar.getTime()) + ".png");
 				
 				FileUtils.copyFile(scrFile, destFile);

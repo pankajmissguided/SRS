@@ -12,5 +12,8 @@ public class HomePage {
 	public String getTitle() {
 		return driver.getTitle();
 	}
+	public String getCurrentUrl() {
+		return driver.getCurrentUrl();
+	}
 
 }
