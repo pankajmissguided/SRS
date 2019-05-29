@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="13372" started-at="2019-05-28T18:23:44Z" finished-at="2019-05-28T18:23:57Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="13372" started-at="2019-05-28T18:23:44Z" finished-at="2019-05-28T18:23:57Z">
+      <class name="com.sussex.testMethods.TC02_verifyLoginTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sussex.testMethods.TC02_verifyLoginTest@91161c7]" name="setUp" is-config="true" duration-ms="13825" started-at="2019-05-28T19:23:30Z" finished-at="2019-05-28T19:23:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="VerifyLoginTest(java.lang.String, java.lang.String, java.lang.String)[pri:1, instance:com.sussex.testMethods.TC02_verifyLoginTest@91161c7]" name="VerifyLoginTest" duration-ms="12053" started-at="2019-05-28T19:23:45Z" data-provider="LoginData" finished-at="2019-05-28T19:23:57Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[1011002]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Pa55w0rd#]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Y]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyLoginTest -->
+        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:com.sussex.testMethods.TC02_verifyLoginTest@91161c7]" name="closeBrowser" is-config="true" duration-ms="1110" started-at="2019-05-28T19:23:57Z" finished-at="2019-05-28T19:23:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+      </class> <!-- com.sussex.testMethods.TC02_verifyLoginTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

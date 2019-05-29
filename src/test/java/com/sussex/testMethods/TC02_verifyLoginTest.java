@@ -1,6 +1,9 @@
 package com.sussex.testMethods;
 
 import com.sussex.pageObjects.LoginPage;
+
+import static org.testng.Assert.assertEquals;
+
 import java.io.IOException;
 
 import org.testng.Assert;
@@ -20,6 +23,7 @@ public class TC02_verifyLoginTest extends TestBase {
 
 	LoginPage loginPage;
 	HomePage homePage;
+	RegistrationPage registrationPage;
 
 //	SerpPage serpPage;
 	public TC02_verifyLoginTest() {
@@ -38,8 +42,9 @@ public class TC02_verifyLoginTest extends TestBase {
 		try {
 			initialize();
 			report = new ExtentReports(System.getProperty("user.dir") + "\\ExtentReports.html");
-			test = report.startTest("TS01_LoginTest");
+			test = report.startTest("TC01_verifyLoginTest");
 			loginPage = new LoginPage(driver);
+			registrationPage = new RegistrationPage(driver);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -48,21 +53,38 @@ public class TC02_verifyLoginTest extends TestBase {
 	}
 
 	@Test(enabled = true, priority = 1, dataProvider = "LoginData")
-	public void VerifyLoginTest(String username, String password, String runMode) throws InterruptedException {
+	public void VerifyLoginTest(String loginPageTitle, String username, String password,String homePageTitle, String runMode) throws InterruptedException {
 		if (runMode.equalsIgnoreCase("n")) {
 			throw new SkipException("user marked this record as no run");
 		}
 		try {
-			test.log(LogStatus.PASS, "***************TC002 Verify Login page with no password****************");
+			test.log(LogStatus.PASS, "***************TC001 Verify Login with valid Login Details****************");
 			
 			// LoginPage loginPage = new LoginPage(driver);
-			test.log(LogStatus.PASS, "Entering Email Id to the login page ");
-			loginPage.loginButton();
+			loginPage.acceptCookies();
+			test.log(LogStatus.PASS, "On Registeration page clicking on Login Button");
+			registrationPage.loginButton();
+			test.log(LogStatus.PASS,  "*****Entering username in Loging Page*****");
+			loginPage.uosLogo();
+			Assert.assertEquals(loginPage.getTitle(), loginPageTitle);
+			
+			loginPage.enterUserName(username);
+			Thread.sleep(2000);
+			System.out.println("Password");
+			test.log(LogStatus.PASS, "On Registeration page clicking on Login Button");
+			loginPage.enterPassword(password);
+			Thread.sleep(2000);
+			
 			test.log(LogStatus.PASS, "Clicking on to the Login Button ");
 			loginPage.clickLoginbutton();
 			Thread.sleep(2000);
-			test.log(LogStatus.PASS, "Verify the problem error messgae is appearing correctly in the Login Page");
+			
+			loginPage.acceptCookies();
+			Assert.assertEquals(loginPage.getTitle(), homePageTitle);
+			
+			
 			loginPage.refreshPage();// Assertions
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			test.log(LogStatus.FAIL, "fail to validate login page without password Credentials");
@@ -71,7 +93,7 @@ public class TC02_verifyLoginTest extends TestBase {
 
 	@AfterSuite
 	public void closeBrowser() {
-		driver.close();
+	    driver.close();
 		report.endTest(test);
 		report.flush();
 	}

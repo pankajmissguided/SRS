@@ -69,6 +69,7 @@ public static String path;
 		driver.get(prop.getProperty("siteurl"));
 		Thread.sleep(4000);
 			driver.manage().window().maximize(); // window maximize
+			driver.manage().deleteAllCookies();
 
 	}
 

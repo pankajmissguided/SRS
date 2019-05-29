@@ -1,6 +1,7 @@
 package com.sussex.pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -24,15 +25,23 @@ public class LoginPage {
 		// TODO Auto-generated method stub
 		driver.navigate().refresh();
 	}
+	
+	//Objects to handle cookies
+	By AcceptCookies = By.id("CloseCookieMsg");
+	public void acceptCookies() {
+		driver.findElement(AcceptCookies).isDisplayed();
+		driver.findElement(AcceptCookies).isEnabled();
+		driver.findElement(AcceptCookies).click();
+	}
 
 	// Object for Login Button On RegistrationPage
-	By LoginButton = By
+	By loginButton = By
 			.xpath("//a[@class='primary dataEntryPanelActionButton link dataLink alignInherit buttonStyle']");
 
 	public void loginButton() {
-		driver.findElement(LoginButton).isDisplayed();
-		driver.findElement(LoginButton).isEnabled();
-		driver.findElement(LoginButton).click();
+		driver.findElement(loginButton).isDisplayed();
+		driver.findElement(loginButton).isEnabled();
+		driver.findElement(loginButton).click();
 	}
 
 	// Object for Login in LoginPage :- Username,Password,LoginButton
@@ -43,18 +52,22 @@ public class LoginPage {
 	public void enterUserName(String uname) {
 		driver.findElement(username).clear();
 		driver.findElement(username).sendKeys(uname);
+		driver.findElement(username).sendKeys(Keys.TAB);
 	}
 
 	// Object for password
-	By password = By.name("Password");
+	By password1 = By.id("Password");
 
-	public void enterPassword(String pass) {
-		driver.findElement(password).clear();
-		driver.findElement(password).sendKeys(pass);
+	public void enterPassword(String password) {
+		
+		driver.findElement(password1).clear();
+		driver.findElement(password1).sendKeys(password);
 	}
+	
+	
 
 	// Object for Login button
-	By loginbtn = By.name("BtnLogOn");
+	By loginbtn = By.id("BtnLogOn");
 
 	public void clickLoginbutton() {
 		try {

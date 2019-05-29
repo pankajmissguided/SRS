@@ -70,7 +70,7 @@ public class TC01_verifyRegistrationPage extends TestBase {
 	public void closeBrowser() {
 		try {
 			Thread.sleep(1000);
-			driver.close();
+			//driver.close();
 			report.endTest(test);
 			report.flush();
 		} catch (Exception e) {
