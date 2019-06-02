@@ -44,7 +44,7 @@ public static String path;
 	public void properties() throws IOException {
 		prop = new Properties();
 		try {
-			path = "C:\\SRS\\SRS\\src\\test\\java\\com\\susex\\configs\\";
+			path = System.getProperty("user.dir") + "\\src\\test\\java\\com\\susex\\configs\\";
 			fis = new FileInputStream(path+"config.properties");
 			prop.load(fis);
 			System.out.println("Properties from config file " + prop);

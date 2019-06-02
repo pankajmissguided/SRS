@@ -1,6 +1,8 @@
 package com.sussex.testMethods;
 import static org.junit.Assert.assertTrue;
 import java.io.IOException;
+
+import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
@@ -51,19 +53,39 @@ public class TC01_verifyRegistrationPage extends TestBase {
 		}
 	}
 	 
-	@Test(enabled = true,dataProvider = "Register")
-	public void TS01_verifyTudentAbleToRegister(String familyName,String givenName
+	@Test(enabled = true, dataProvider = "Register")
+	public void TS01_verifyStudentAbleToRegisterToWithSussexUniversity(String familyName,String givenName
 ,String dateOFBirth
 ,String gender
 ,String emailId
 ,String nationality
 ,String password
-, String conPassword) {
-
+, String conPassword, String runMode) {
+		if (runMode.equalsIgnoreCase("n")) {
+			throw new SkipException("user marked this record as no run");
+		}
 		 try {
-			 loginPage.acceptCookies();
-							
-								
+			 
+			  registrationPage.EnterFamilyName(familyName);
+			  registrationPage.EnterGivenName(givenName);
+			  Thread.sleep(2000);
+			  registrationPage.EnterDateOfBirth(dateOFBirth);
+			  Thread.sleep(4000);
+			  registrationPage.enterGender(gender);
+			  Thread.sleep(2000);
+			 registrationPage.enterEmailId(emailId);
+			 Thread.sleep(2000);
+			 registrationPage.nationality(nationality);
+			 Thread.sleep(2000);
+			 registrationPage.password(password);
+			 Thread.sleep(2000);
+			 registrationPage.conPassword(conPassword);
+			 Thread.sleep(2000);
+			 registrationPage.previouslyAppliedcheckBox();
+			 Thread.sleep(2000);
+			 registrationPage.termsAndConditionCheckBox();
+			 Thread.sleep(2000);
+			 registrationPage.clickOnRegisterButton();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -76,7 +98,7 @@ public class TC01_verifyRegistrationPage extends TestBase {
 	public void closeBrowser() {
 		try {
 			Thread.sleep(1000);
-			driver.close();
+			// driver.close();
 			report.endTest(test);
 			report.flush();
 		} catch (Exception e) {
