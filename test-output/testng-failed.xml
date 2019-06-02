@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.sussex.testMethods.TC02_verifyLoginTest">
+      <class name="com.sussex.testMethods.TC01_verifyRegistrationPage">
         <methods>
-          <include name="setUp"/>
-          <include name="VerifyLoginTest" invocation-numbers="1 2 3"/>
+          <include name="TS01_verifyTudentAbleToRegister"/>
           <include name="closeBrowser"/>
+          <include name="setUp"/>
         </methods>
-      </class> <!-- com.sussex.testMethods.TC02_verifyLoginTest -->
+      </class> <!-- com.sussex.testMethods.TC01_verifyRegistrationPage -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

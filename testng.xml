@@ -4,8 +4,8 @@
 
   <test name="RegressionTest">
     <classes>
-       <class name="com.sussex.testMethods.TC02_verifyLoginTest"/> 
-       
+      
+       <class name="com.sussex.testMethods.TS01_verifyTudentAbleToRegister"/> 
        </classes>
   </test>
 </suite> 

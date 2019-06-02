@@ -3,10 +3,12 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.LogStatus;
 import com.sussex.pageObjects.HomePage;
+import com.sussex.pageObjects.LoginPage;
 import com.sussex.pageObjects.RegistrationPage;
 import com.sussex.testBase.TestBase;
 
@@ -19,10 +21,16 @@ public class TC01_verifyRegistrationPage extends TestBase {
 	
 	RegistrationPage registrationPage;
 	HomePage homePage;
+	LoginPage loginPage;
 //	SerpPage serpPage;
 	public TC01_verifyRegistrationPage() {
 		
 		super();
+	}
+	@DataProvider(name = "Register")
+	public String[][] Register() {
+		String[][] testRecords = getData("Registration.xlsx", "Register");
+		return testRecords;
 	}
 	
 	@BeforeSuite
@@ -35,6 +43,7 @@ public class TC01_verifyRegistrationPage extends TestBase {
 			test = report.startTest("Home Page Controls verification");
 			registrationPage = new RegistrationPage(driver);
 			homePage = new HomePage(driver);
+			loginPage = new LoginPage(driver);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -42,22 +51,19 @@ public class TC01_verifyRegistrationPage extends TestBase {
 		}
 	}
 	 
-		@Test(enabled = true)
-	public void TS01_verifyUserAbleToRegisterToSussexUniversity(){
+	@Test(enabled = true,dataProvider = "Register")
+	public void TS01_verifyTudentAbleToRegister(String familyName,String givenName
+,String dateOFBirth
+,String gender
+,String emailId
+,String nationality
+,String password
+, String conPassword) {
+
 		 try {
-			    test.log(LogStatus.PASS, "------TC02_Verify Services Page info --------");
-				test.log(LogStatus.PASS, "Verify the Home Page Title - " + homePage.getTitle());
-				//homePage.clickOnMenu().click();
-				test.log(LogStatus.PASS, "Click on Services Menu");
-				Thread.sleep(1500);
-			   // homePage.clickServiceMenu("Services");
-			    Thread.sleep(2000);
-			    test.log(LogStatus.PASS, "Verify the Service Header exits");
-			   // assertTrue(homePage.getHeaderName("Services"));
-			    Thread.sleep(2000);
-				//homePage.closeMenu().click();
-				 Thread.sleep(2000);
-				
+			 loginPage.acceptCookies();
+							
+								
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -70,7 +76,7 @@ public class TC01_verifyRegistrationPage extends TestBase {
 	public void closeBrowser() {
 		try {
 			Thread.sleep(1000);
-			//driver.close();
+			driver.close();
 			report.endTest(test);
 			report.flush();
 		} catch (Exception e) {

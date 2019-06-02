@@ -36,6 +36,12 @@ public class TC02_verifyLoginTest extends TestBase {
 		String[][] testRecords = getData("TestData.xlsx", "ValidUserLogin");
 		return testRecords;
 	}
+	
+	@DataProvider(name = "ValidationOnLoginPage")
+	public String[][] ValidationOnLoginPage() {
+		String[][] testRecords = getData("TestData.xlsx", "ValidationOnLoginPage");
+		return testRecords;
+	}
 
 	@BeforeSuite
 	public void setUp() throws InterruptedException {
@@ -52,7 +58,7 @@ public class TC02_verifyLoginTest extends TestBase {
 		}
 	}
 
-	@Test(enabled = true, priority = 1, dataProvider = "LoginData")
+	@Test(enabled = true, priority = 0, dataProvider = "LoginData")
 	public void VerifyLoginTest(String loginPageTitle, String username, String password,String homePageTitle, String runMode) throws InterruptedException {
 		if (runMode.equalsIgnoreCase("n")) {
 			throw new SkipException("user marked this record as no run");
@@ -84,6 +90,50 @@ public class TC02_verifyLoginTest extends TestBase {
 			
 			
 			loginPage.refreshPage();// Assertions
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			test.log(LogStatus.FAIL, "fail to validate login page without password Credentials");
+		}
+	}
+	
+	@Test(enabled = true, priority = 1, dataProvider = "ValidationOnLoginPage")
+	public void VerifyElementsOnLogOnPage(String loginPageTitle, String logOnText,String termsAndCondition,String runMode) throws InterruptedException {
+		if (runMode.equalsIgnoreCase("n")) {
+			throw new SkipException("user marked this record as no run");
+		}
+		try {
+			test.log(LogStatus.PASS, "***************TC002--01 Verify Elements on Login Page****************");
+			test.log(LogStatus.PASS, "***************TC002--02 Accepting cookies on Registration page****************");
+			// LoginPage loginPage = new LoginPage(driver);
+			loginPage.acceptCookies();
+			test.log(LogStatus.PASS, "*****TC002--03 On Registration page, clicking on Login Button*****");
+			registrationPage.loginButton();
+			test.log(LogStatus.PASS,  "*****TC002--04 Accpting cookies on login page*****");
+			loginPage.acceptCookies();
+			loginPage.uosLogo();
+			Assert.assertEquals(loginPage.getTitle(), loginPageTitle);
+			System.out.println("Successfully validates the title of the page  - " + loginPage.getTitle());	
+			loginPage.getLogOnText();
+			Assert.assertEquals(loginPage.getLogOnText(), logOnText);
+			System.out.println("Successfully validating the logon text on the logon Page");
+			Thread.sleep(8000);
+			loginPage.verifyLink();
+			Assert.assertEquals(loginPage.verifyLink(), termsAndCondition);
+			System.out.println("Successfully verify the View Terms and Condition Link");
+			
+			
+			
+			//loginPage.defaultChk();
+			//Assert.assertTrue(loginPage.defaultChk().isSelected());
+			//System.out.println("Check Box is default selected");
+			//loginPage.optionalChk();
+            //Assert.assertFalse(loginPage.optionalChk().isSelected());
+			//System.out.println("Check Box is not selected");
+
+			 
+
+
 			
 		} catch (Exception e) {
 			// TODO: handle exception

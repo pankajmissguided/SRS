@@ -160,5 +160,47 @@ public class LoginPage {
 		driver.findElement(ForgotPassValidationText).isDisplayed();
 		return driver.findElement(ForgotPassValidationText).getText();
 	}
+	
+	
+	
+	//objects on log in page
+
+	By LogOnText = By.xpath("//h2[contains(text(),'Log on using your details')]");
+
+	public String getLogOnText(){
+	driver.findElement(LogOnText).isDisplayed();
+	return driver.findElement(LogOnText).getText();
+	}
+
+	// //Objects for Default Check in Box
+	 By DefaultChk = By.xpath("//*[@id='RememberMe']/div[1]");
+
+	 public void defaultChk(){
+	driver.findElement(DefaultChk).isDisplayed();
+	driver.findElement(DefaultChk);
+	
+	 }
+	 
+	//Objects for Optional Check boxes appearing in Log in page
+
+	 By OptionalChk = By.xpath("//*[@id='RememberMe']/div[1]");
+
+	 public void optionalChk(){
+	driver.findElement(OptionalChk).isDisplayed();
+	driver.findElement(OptionalChk);
+	 }
+	 
+	 //Objects for Link terms & Condition
+
+	 By LinkTermsCondition = By.partialLinkText("View Terms");
+
+	 public String verifyLink(){
+	  driver.findElement(LinkTermsCondition).isDisplayed();
+	  driver.findElement(LinkTermsCondition).isEnabled();
+	  //driver.findElement(LinkTermsCondition).click();
+return driver.findElement(LinkTermsCondition).getText();
+
+	 }
+
 
 }
